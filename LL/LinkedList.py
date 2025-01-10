@@ -195,7 +195,19 @@ class LinkedList:
                 values.add(current.value)
                 previous = current
             current = current.next
-
+    def kth_element(self, ll, k):
+        """finds the kth element from the linked list."""
+        slow = fast = self.head
+        if k == 0:
+            return None
+        for _ in range(k):
+            if fast is None:
+                return None
+            fast = fast.next
+        while fast:
+            slow = slow.next
+            fast = fast.next
+        return slow.value
 
 
 
@@ -225,4 +237,5 @@ print("Middle node in LL: ", my_ll.find_middle())
 print("After removing the duplicants: ", my_ll.remove_duplicates())
 my_ll.print_list()
 # print("Element at 6th index: " + str(my_ll.get(6)))
-
+print("Kth element from end in LL: ")
+print(my_ll.kth_element(my_ll, 4))
