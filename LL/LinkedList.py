@@ -195,6 +195,7 @@ class LinkedList:
                 values.add(current.value)
                 previous = current
             current = current.next
+
     def kth_element(self, ll, k):
         """finds the kth element from the linked list."""
         slow = fast = self.head
@@ -209,6 +210,23 @@ class LinkedList:
             fast = fast.next
         return slow.value
 
+    def reverse_between(self, m, n):
+        if not self.head:
+            return None
+        dummy = Node(0)
+        dummy.next = self.head
+        prev = dummy
+        for _ in range(m):
+            prev = prev.next
+
+        current = prev.next
+        for i in range(n - m):
+            temp = current.next
+            current.next = temp.next
+            temp.next = prev.next
+            prev.next = temp
+
+        self.head = dummy.next
 
 
 my_ll = LinkedList(11)
