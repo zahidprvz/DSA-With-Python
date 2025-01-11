@@ -36,9 +36,26 @@ class DoublyLinkedList:
         self.length += 1
         return True
 
+    def pop(self):
+        """Removes and returns the last node from the doubly linked list."""
+        if self.head is None:  # Case: Empty list
+            return None
+
+        temp = self.head
+        if self.length == 1:
+            self.head = None
+            self.tail = None
+        else:
+            self.tail = self.tail.prev
+            self.tail.next = None
+            self.tail = None
+        self.length -= 1
+        return temp
+
 my_d_ll = DoublyLinkedList(1)
 my_d_ll.append(2)
 my_d_ll.append(3)
 my_d_ll.append(4)
 my_d_ll.append(5)
 my_d_ll.print_list()
+print(my_d_ll.pop())
