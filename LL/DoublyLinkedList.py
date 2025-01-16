@@ -130,8 +130,31 @@ class DoublyLinkedList:
     def swap_first_and_last(self):
         if self.head is None or self.head == self.tail:
             return None
+        self.head.value, self.tail.value = self.tail.value, self.head.value
         
+    def reverse(self):
+        temp = self.head
+        while(temp):
+            # swaping nodes
+            temp.next, temp.prev = temp.prev, temp.next
 
+            # moving the pointer to next node for the above step
+            temp = temp.prev
+            
+            # swapping the head and tail as a final step
+            self.head, self.tail = self.tail , self.head
+
+    def is_palindrome(self):
+        if self.length <= 1:
+            return True
+        forward_node = self.head
+        backward_node = self.tail
+        for i in range(self.length // 2):
+            if forward_node.value != backward_node.value:
+                return False
+            forward_node = forward_node.next
+            backward_node = backward_node.prev
+        return True
 
 my_d_ll = DoublyLinkedList(0)
 my_d_ll.append(1)
@@ -160,9 +183,16 @@ my_d_ll.set_value(2, 143)
 my_d_ll.print_list()
 
 print("\n\nAfter inserting new node at index 1: ")
-my_d_ll.insert(1, 108)
+my_d_ll.insert(1, 143)
 my_d_ll.print_list()
 
 print("\n\nAfter removing the node at index 0: ")
 my_d_ll.remove(0)
 my_d_ll.print_list()
+
+print("\n\nAfter reversing the DLL: ")
+my_d_ll.reverse()
+my_d_ll.print_list()
+
+print("\n\nIs this DLL a palidrome ? ")
+print(my_d_ll.is_palindrome())
